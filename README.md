@@ -21,18 +21,50 @@ var configuration = new ConfigurationBuilder()
     .Build();
 ```
 
+Or with a root key
+
+```csharp
+var configuration = new ConfigurationBuilder()
+    .AddObject(new
+    {
+        MyProperty = "MyValue",
+        MySection = new 
+        {
+            MyOtherProperty = "MyOtherValue"
+        }
+    }, "MyRootKey")
+    .Build();
+```
+
 Instead of this:
 ```csharp
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 ```
+
+Without RootKey
+
 ```json
 // appsettings.json
 {
     "MyProperty": "MyValue",
     "MySection": { 
         "MyOtherProperty": "MyOtherValue"
+    }
+}
+```
+
+With RootKey
+
+```json
+// appsettings.json
+{
+    "MyRootKey": {
+        "MyProperty": "MyValue",
+        "MySection": { 
+            "MyOtherProperty": "MyOtherValue"
+        }
     }
 }
 ```
